@@ -37,6 +37,7 @@ class EditorConfig {
     this.editActionDetailsIsChanged,
     this.reverseMousePointerScrollDirection = false,
     this.controller,
+    this.animationCurve = Curves.linear,
   }) : assert(lineHeight > 0.0),
        assert(hitTestSize >= 0.0),
        assert(maxScale > 0.0),
@@ -120,6 +121,8 @@ class EditorConfig {
   /// This allows for external control of the editing process.
   final ImageEditorController? controller;
 
+  final Curve animationCurve;
+
   EditorConfig copyWith({
     double? maxScale,
     EdgeInsets? cropRectPadding,
@@ -140,6 +143,7 @@ class EditorConfig {
     EditActionDetailsIsChanged? editActionDetailsIsChanged,
     bool? reverseMousePointerScrollDirection,
     ImageEditorController? controller,
+    Curve? animationCurve,
   }) {
     return EditorConfig(
       maxScale: maxScale ?? this.maxScale,
@@ -148,24 +152,20 @@ class EditorConfig {
       cornerColor: cornerColor ?? this.cornerColor,
       lineColor: lineColor ?? this.lineColor,
       lineHeight: lineHeight ?? this.lineHeight,
-      editorMaskColorHandler:
-          editorMaskColorHandler ?? this.editorMaskColorHandler,
+      editorMaskColorHandler: editorMaskColorHandler ?? this.editorMaskColorHandler,
       hitTestSize: hitTestSize ?? this.hitTestSize,
       animationDuration: animationDuration ?? this.animationDuration,
       tickerDuration: tickerDuration ?? this.tickerDuration,
       cropAspectRatio: cropAspectRatio ?? this.cropAspectRatio,
-      initialCropAspectRatio:
-          initialCropAspectRatio ?? this.initialCropAspectRatio,
+      initialCropAspectRatio: initialCropAspectRatio ?? this.initialCropAspectRatio,
       initCropRectType: initCropRectType ?? this.initCropRectType,
       cropLayerPainter: cropLayerPainter ?? this.cropLayerPainter,
       speed: speed ?? this.speed,
       hitTestBehavior: hitTestBehavior ?? this.hitTestBehavior,
-      editActionDetailsIsChanged:
-          editActionDetailsIsChanged ?? this.editActionDetailsIsChanged,
-      reverseMousePointerScrollDirection:
-          reverseMousePointerScrollDirection ??
-          this.reverseMousePointerScrollDirection,
+      editActionDetailsIsChanged: editActionDetailsIsChanged ?? this.editActionDetailsIsChanged,
+      reverseMousePointerScrollDirection: reverseMousePointerScrollDirection ?? this.reverseMousePointerScrollDirection,
       controller: controller ?? this.controller,
+      animationCurve: animationCurve ?? this.animationCurve,
     );
   }
 
@@ -192,8 +192,8 @@ class EditorConfig {
         other.speed == speed &&
         other.hitTestBehavior == hitTestBehavior &&
         other.editActionDetailsIsChanged == editActionDetailsIsChanged &&
-        other.reverseMousePointerScrollDirection ==
-            reverseMousePointerScrollDirection &&
+        other.reverseMousePointerScrollDirection == reverseMousePointerScrollDirection &&
+        other.animationCurve == animationCurve &&
         other.controller == controller;
   }
 

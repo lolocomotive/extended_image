@@ -582,10 +582,12 @@ class ExtendedImageCropLayerState extends State<ExtendedImageCropLayer>
       final Rect newScreenCropRect = centerCropRect.shift(
         widget.editActionDetails.layoutTopLeft!,
       );
-
-      _rectAnimation = _rectTweenController.drive<Rect?>(
-        RectTween(begin: oldScreenCropRect, end: newScreenCropRect),
+      final CurvedAnimation curvedAnimation = CurvedAnimation(
+        parent: _rectTweenController,
+        curve:widget.editorConfig.animationCurve,
       );
+      final RectTween tween = RectTween(begin: oldScreenCropRect, end: newScreenCropRect);
+      _rectAnimation = tween.animate(curvedAnimation);
       _rectTweenController.reset();
       _rectTweenController.forward();
     });
